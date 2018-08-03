@@ -28,6 +28,14 @@
     background-color: blue; 
   }
 
-  #map {
+  #map, .images {
     display: none;  
+   }
+   /* .images{
+    width: 70%;
+    height: 30%;
+   } */
+   img{
+     width: 30%;
+     height: 30%;
    }
