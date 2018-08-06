@@ -9,33 +9,44 @@ $(document).ready(function() {
   $('.search').click(function(){
     printInfo();
   });
+
+  $(function() {
+    var options = [];
+    for(var restaurante in restaurantes){
+      var types = restaurantes[restaurante]['type'];
+      options.push(types);
+    }
+    $("#textFilter" ).autocomplete({
+      source: options
+    });
+  });
+  openModal();
 });
 function printInfo() {
   var inputValue = $('#textFilter').val();
   $( "img" ).each(function( ) {
-    if($(this).attr("alt") !== inputValue) {
+    if($(this).attr("id") !== inputValue) {
       $(this).fadeOut('slow');
+    }else{
+      $(this).fadeIn('slow');
+      openModalSelected();
     }
     if(inputValue === ""){
       $(this).fadeIn('slow');
     }
   });
-
   pinsIncrement(inputValue);
 }
 function getImages(){
   for(var restaurante in restaurantes){
-    // console.log(res); esse mostra cada obj restaurante
     var img = restaurantes[restaurante]['image'];
     var types = restaurantes[restaurante]['type'];
-      // console.log(img); esse pega cada caminho de imagem
-      var tagImg = $('<img>').attr("src", img).attr("alt", types);
-      $(".images").append(tagImg);
-
+    var description = restaurantes[restaurante]['description'];
+    var tagImg = $('<img>').attr("src", img).attr("id", types).attr("class", "modal-window").attr("alt", description);
+    $(".images").append(tagImg);
   }
 }
 var locations = [];
-
 function pinsIncrement(inputValue){
   for(var restaurante in restaurantes){
     var position = [];
@@ -50,7 +61,46 @@ function pinsIncrement(inputValue){
   }
   initMap();
 }
-
+function openModal(){
+  var img = [];
+  var span = []; 
+  for(var i=0; i <restaurantes.length; i++){
+    img[i] = document.getElementsByClassName("modal-window")[i];
+    img[i].addEventListener("click", imageModal);
+  } 
+  for (var i = 0; i <restaurantes.length; i++){
+    span[i]= document.getElementsByClassName("close")[0];
+    span[i].addEventListener("click", closeModal);
+  }
+}
+var modal = document.getElementById('myModal');
+var modalImg = document.getElementById("imagenMostrar");
+var captionText = document.getElementById("caption");
+function imageModal(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerText = this.alt;
+}
+function closeModal() {
+  modal.style.display = "none";
+}
+function openModalSelected(image){
+  var span = [];
+  var img = [];
+  image.addEventListener("click", imageModalSelected);
+  for (var i = 0; i <restaurantes.length; i++){
+    span[i]= document.getElementsByClassName("close")[0];
+    span[i].addEventListener("click", closeModalSelected);
+  }
+}    
+function imageModalSelected(){
+  modal.style.display = "block";
+  modalImg.src = this.src;
+  captionText.innerText = this.alt;
+}
+function closeModalSelected() {
+  modal.style.display = "none";
+}
 function initMap() {
 var map = new google.maps.Map(document.getElementById('map'), {
   zoom: 15,

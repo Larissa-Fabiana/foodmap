@@ -22,6 +22,9 @@ body{
   animation-iteration-count: 3;
 }
 .title{
+  display: flex;
+  align-content: center;
+  justify-content: center;
   color: #FF8C00;
   font-size: 300%;
 }
@@ -32,4 +35,56 @@ img{
   width: 30vw;
   height: 20vh;
   margin: 1vw;
+}
+#textFilter{
+  width: 70vw;
+  margin: 2vh 0vw 2vh 4vw;
+}
+.search{
+  background-color: #FF8C00;
+  text-decoration: none;
+  border: 2px solid #FF8C00;
+}
+.modal {
+  background-color: white;
+  display: none;
+  height: 70vh;
+  width: 70vw;
+  position: fixed;
+  top: 0;
+  z-index: 1;
+  margin: 15vh 15vw;
+}
+.modal-content {
+  display: block;
+  left: 20%;
+  position: relative;
+  top: 5%;
+  width: 50%;
+}
+#caption{
+  display: block;
+  left: 5%;
+  position: relative;
+  bottom: 0%;
+  width: 90%;
+  margin: 0%;
+  font-size: 0.9rem;
+  padding: 5vh 5vw;;
+}
+
+.close {
+  color: #FF8C00;
+  font-size: 50px;
+  font-weight: bold;
+  position: absolute;
+  right: 3vw;
+  transition: 0.3s;
+  top: 2vh;
+}
+.close:hover,
+.close:focus {
+  color: #f1f1f1;
+  cursor: pointer;
+  text-decoration: none;
 }
