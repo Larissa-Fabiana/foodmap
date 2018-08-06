@@ -4,12 +4,6 @@ $(document).ready(function() {
   $('#map').delay('5000').fadeToggle('slow');
   $('.images').delay('5000').fadeToggle('slow');
   getImages();
-  var init = "";
-  pinsIncrement(init);
-  $('.search').click(function(){
-    printInfo();
-  });
-
   $(function() {
     var options = [];
     for(var restaurante in restaurantes){
@@ -21,6 +15,13 @@ $(document).ready(function() {
     });
   });
   openModal();
+  var init = "";
+  pinsIncrement(init);
+  $('.search').click(function(){
+    printInfo();
+  });
+
+
 });
 function printInfo() {
   var inputValue = $('#textFilter').val();
@@ -59,7 +60,8 @@ function pinsIncrement(inputValue){
       locations.push(position);
     }
   }
-  initMap();
+  // Descomentar essa linha abaixo para funcionamento do mapa
+  // initMap();
 }
 function openModal(){
   var img = [];
